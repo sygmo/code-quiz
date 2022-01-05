@@ -1,3 +1,16 @@
+.nav-bar {
+    width: 100%;
+}
+
+.nav-bar a {
+
+}
+
+.nav-bar p {
+    display: inline;
+    float: right;
+}
+
 .intro-view {
     text-align: center;
 }
@@ -5,4 +18,16 @@
 .centered {
     margin: auto;
     width: 50%;
+}
+
+.question-view {
+    display: none;
+}
+
+.completed-view {
+    display: none;
+}
+
+.highscores-view {
+    display: none;
 }

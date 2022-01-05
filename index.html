@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Quiz</title>
+    <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -12,11 +13,40 @@
         <a href="">View Highscores</a>
         <p>Time: <span id="time-left">0</span></p>
     </nav>
+
     <div class="intro-view centered">
         <h1>Code Quiz Challenge</h1>
         <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
         <button>Start Quiz</button>
     </div>
+
+    <div class="question-view centered">
+        <p id="question"></p>
+        <ol id="options">
+            <li id="opt1"></li>
+            <li id="opt2"></li>
+            <li id="opt3"></li>
+            <li id="opt4"></li>
+        </ol>
+    </div>
+
+    <div class="completed-view centered">
+        <h2>All done!</h2>
+        <p>Your final score is <span id="final-score"></span>.</p>
+        <form action="">
+            <label for="initials">Enter initials: </label>
+            <input type="text" name="initials" id="initials">
+            <button>Submit</button>
+        </form>
+    </div>
+
+    <div class="highscores-view centered">
+        <h2>Highscores</h2>
+        <ol id="highscores-list"></ol>
+        <button>Go Back</button>
+        <button>Clear Highscores</button>
+    </div>
+
 
 
     <script src="assets/js/script.js"></script>
