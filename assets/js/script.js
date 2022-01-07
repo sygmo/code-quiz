@@ -40,9 +40,37 @@ const questions = [
         option4: "console.log",
         correct: "option4"
     }
-]
+];
 
-// user clicks start button
+var startButton = document.querySelector(".start-button");
+var timerEl = document.getElementById("time-left");
+
+var isEnd = false;
+var timer;
+var timerCount;
+
+function startQuiz() {
+    isEnd = false;
+    timerCount = 30;
+
+    timer = setInterval(function() {
+        timerCount--;
+        timerEl.textContent = timerCount;
+
+        // timer runs out
+        if (timerCount <= 0) {
+            clearInterval(timer);
+            endQuiz();
+        }
+    }, 1000);
+}
+
+function endQuiz() {
+    console.log("Quiz ended");
+}
+
+// user clicks start button to start game
+startButton.addEventListener("click", startQuiz);
 
 // start timer
 
