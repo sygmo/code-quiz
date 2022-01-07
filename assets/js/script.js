@@ -44,15 +44,27 @@ const questions = [
 
 var startButton = document.querySelector(".start-button");
 var timerEl = document.getElementById("time-left");
+var introView = document.querySelector(".intro-view");
+var questionView = document.querySelector(".question-view");
 
 var isEnd = false;
 var timer;
 var timerCount;
+var questionIndex = 0;
 
 function startQuiz() {
     isEnd = false;
     timerCount = 30;
+    questionIndex = 0;
 
+    // hide intro view and display question view
+    introView.style.display = "none";
+    questionView.style.display = "block";
+
+    // display first question
+    displayNextQuestion();
+
+    // start timer
     timer = setInterval(function() {
         timerCount--;
         timerEl.textContent = timerCount;
@@ -65,14 +77,16 @@ function startQuiz() {
     }, 1000);
 }
 
+function displayNextQuestion() {
+    console.log("Question #" + questionIndex);
+}
+
 function endQuiz() {
     console.log("Quiz ended");
 }
 
 // user clicks start button to start game
 startButton.addEventListener("click", startQuiz);
-
-// start timer
 
 // present next question
 
