@@ -6,7 +6,7 @@ const questions = [
         option2: "2. booleans",
         option3: "3. alerts",
         option4: "4. numbers",
-        correct: "option3"
+        correct: "3. alerts"
     },
     {
         question: "The condition in an if / else statement is enclosed within _____.",
@@ -14,7 +14,7 @@ const questions = [
         option2: "2. curly brackets",
         option3: "3. parentheses",
         option4: "4. square brackets",
-        correct: "option3"
+        correct: "3. parentheses"
     },
     {
         question: "Arrays in JavaScript can be used to store _____.",
@@ -22,7 +22,7 @@ const questions = [
         option2: "2. other arrays",
         option3: "3. booleans",
         option4: "4. all of the above",
-        correct: "option4"
+        correct: "4. all of the above"
     },
     {
         question: "String values must be enclosed within _____ when being assigned to variables.",
@@ -30,7 +30,7 @@ const questions = [
         option2: "2. curly brackets",
         option3: "3. quotes",
         option4: "4. parentheses",
-        correct: "option3"
+        correct: "3. quotes"
     },
     {
         question: "A very useful tool used during development and debugging for printing content to the debugger is:",
@@ -38,7 +38,7 @@ const questions = [
         option2: "2. terminal / bash",
         option3: "3. for loops",
         option4: "4. console.log",
-        correct: "option4"
+        correct: "4. console.log"
     }
 ];
 
@@ -48,10 +48,12 @@ var introView = document.querySelector(".intro-view");
 var questionView = document.querySelector(".question-view");
 var questionEl = document.getElementById("question");
 var optionsListEl = document.getElementById("options");
-var opt1 = document.getElementById("opt1");
-var opt2 = document.getElementById("opt2");
-var opt3 = document.getElementById("opt3");
-var opt4 = document.getElementById("opt4");
+var optionBtns = document.querySelectorAll(".option");
+var opt1 = document.querySelector(".opt1");
+var opt2 = document.querySelector(".opt2");
+var opt3 = document.querySelector(".opt3");
+var opt4 = document.querySelector(".opt4");
+var completedView = document.querySelector(".completed-view");
 
 var isEnd = false;
 var timer;
@@ -75,14 +77,22 @@ function startQuiz() {
         timerCount--;
         timerEl.textContent = timerCount;
 
+        // end quiz if end conditions are met
+        if (timerCount > 0 && isEnd) {
+            clearInterval(timer);
+            endQuiz();
+        }
+
         // timer runs out
         if (timerCount <= 0) {
             clearInterval(timer);
+            timerEl.textContent = 0;
             endQuiz();
         }
     }, 1000);
 }
 
+// present next question
 function displayNextQuestion() {
     console.log("Question #" + questionIndex);
 
@@ -94,17 +104,39 @@ function displayNextQuestion() {
     opt4.textContent = questions[questionIndex].option4;
 }
 
+function checkAnswer(answer) {
+    // if chosen answer is not correct, decrement time
+    if (answer !== questions[questionIndex].correct) {
+        timerCount -= 10;
+        // TODO: display Wrong! on screen
+    } else {
+        // TODO: display Correct! on screen
+        console.log("correct!");
+    }
+
+    // move on to next question or end quiz
+    questionIndex++;
+    if (questionIndex >= questions.length) {
+        isEnd = true;
+    } else {
+        displayNextQuestion();
+    }
+}
+
 function endQuiz() {
     console.log("Quiz ended");
+    questionView.style.display = "none";
+    completedView.style.display = "block";
 }
 
 // user clicks start button to start game
 startButton.addEventListener("click", startQuiz);
 
-// present next question
-
-// when question answered incorrectly, subtract time from the clock
-
-// game over when timer reaches 0
+// adds event listeners to all answer buttons
+for (i of optionBtns) {
+    i.addEventListener('click', function() {
+        checkAnswer(this.innerHTML);
+    });
+}
 
 // save initials and score
