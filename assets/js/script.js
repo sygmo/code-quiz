@@ -54,6 +54,13 @@ var opt2 = document.querySelector(".opt2");
 var opt3 = document.querySelector(".opt3");
 var opt4 = document.querySelector(".opt4");
 var completedView = document.querySelector(".completed-view");
+var finalScoreEl = document.getElementById("final-score");
+var submitEl = document.querySelector("#submit");
+var navBar = document.querySelector(".nav-bar");
+var highscoresView = document.querySelector(".highscores-view");
+var inititalsEl = document.querySelector("#initials");
+var highscoresList = document.querySelector("#highscores-list");
+var returnEl = document.querySelector("#return");
 
 var isEnd = false;
 var timer;
@@ -62,7 +69,7 @@ var questionIndex = 0;
 
 function startQuiz() {
     isEnd = false;
-    timerCount = 30;
+    timerCount = 75;
     questionIndex = 0;
 
     // hide intro view and display question view
@@ -87,6 +94,7 @@ function startQuiz() {
         if (timerCount <= 0) {
             clearInterval(timer);
             timerEl.textContent = 0;
+            timerCount = 0;
             endQuiz();
         }
     }, 1000);
@@ -127,6 +135,28 @@ function endQuiz() {
     console.log("Quiz ended");
     questionView.style.display = "none";
     completedView.style.display = "block";
+    finalScoreEl.textContent = timerCount;
+}
+
+function addScore(event) {
+    event.preventDefault();
+    completedView.style.display = "none";
+    navBar.style.visibility = "hidden";
+    highscoresView.style.display = "block";
+    
+    // create new list element with initials and score
+    var initials = inititalsEl.value;
+    var listItemEl = document.createElement('li');
+    listItemEl.textContent = initials + " - " + timerCount;
+    highscoresList.append(listItemEl);
+
+}
+
+function returnToHome(event) {
+    event.preventDefault();
+    highscoresView.style.display = "none"
+    navBar.style.visibility = "visible";
+    introView.style.display = "block";
 }
 
 // user clicks start button to start game
@@ -140,3 +170,7 @@ for (i of optionBtns) {
 }
 
 // save initials and score
+submitEl.addEventListener("click", addScore);
+
+// back to homepage
+returnEl.addEventListener("click", returnToHome);
