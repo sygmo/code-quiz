@@ -4,6 +4,8 @@ Developer: Sydney Mercier
 
 For: UT Austin Coding Bootcamp
 
+Deployed At: https://sygmo.github.io/code-quiz/
+
 ## Overview
 
 Code Quiz is a work-in-progress game developed in pure HTML, CSS, and Javascript. It is a timed quiz that has users answer some basic questions about coding concepts. Users are scored based on how many questions they answered correctly as well as on how quickly they answered them. At the end of the quiz, the user can enter their score into a list of highscores.
